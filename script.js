@@ -2569,7 +2569,7 @@ let config = {
   PAUSED: false,
   BACK_COLOR: { r: 0, g: 0, b: 0 },
   TRANSPARENT: false,
-  BLOOM: false,
+  BLOOM: true,
   BLOOM_ITERATIONS: 8,
   BLOOM_RESOLUTION: 256,
   BLOOM_INTENSITY: 0.4,
@@ -3947,6 +3947,7 @@ function updateColors(dt) {
     pointers.forEach((p) => {
       p.color = generateColor();
     });
+
   }
 }
 
@@ -3960,13 +3961,6 @@ function applyInputs() {
     }
   });
 
-  pointers.forEach((p) => {
-    if (p.moved) {
-        p.
-      p.moved = false;
-      splatPointer(p);
-    }
-  });
 }
 
 function step(dt) {
@@ -4462,28 +4456,39 @@ function hashCode(s) {
 
 }
 
-function test(passedPath) {
+// ... (rest of the code remains the same)
 
-    let pathPlanted = 1
+// Instead of mouse event listeners, we'll use a function to draw the path
+function drawPath() {
 
-    setInterval(() => {
-        
-      const somePoint = passedPath[pathPlanted]
-      const lastPoint = passedPath[pathPlanted -1]
-      let color = generateColor();
+  let index = 0;
+  let intervalId = setInterval(() => {
 
-      const texcoordX = somePoint.x / canvas.width;
-      const texcoordY = 1.0 - somePoint.y / canvas.height;
-      const dx = lastPoint.x - somePoint.x
-      const dy = lastPoint.y - somePoint.y
+      if (index >= path.length) {
+          clearInterval(intervalId); 
+          return; 
+      }
 
-      splat(texcoordX, texcoordY, dx, dy, color);
+      let point = path[index];
+      let posX = point.x; 
+      let posY = point.y; 
 
-      pathPlanted++
+      // Simulate mouse down at the start
+      if (index === 0) {
+          updatePointerDownData(pointers[0], -1, posX, posY); 
+      }
 
+      // Simulate mouse move 
+      updatePointerMoveData(pointers[0], posX, posY); 
 
-    }, 15);
+      // Simulate mouse up at the end
+      if (index === path.length - 1) {
+          updatePointerUpData(pointers[0]); 
+      }
 
+      index++;
+  }, 35); // Adjust the interval time for desired drawing speed
 }
 
-test(path)
+// Call the function to start drawing the path
+drawPath(); 
