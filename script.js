@@ -2554,7 +2554,7 @@ resizeCanvas();
 
 let config = {
   SIM_RESOLUTION: 128,
-  DYE_RESOLUTION: 1024,
+  DYE_RESOLUTION: 512,
   CAPTURE_RESOLUTION: 512,
   DENSITY_DISSIPATION: 1,
   VELOCITY_DISSIPATION: 0.2,
@@ -3947,7 +3947,6 @@ function updateColors(dt) {
     pointers.forEach((p) => {
       p.color = generateColor();
     });
-
   }
 }
 
@@ -3960,7 +3959,6 @@ function applyInputs() {
       splatPointer(p);
     }
   });
-
 }
 
 function step(dt) {
@@ -4217,6 +4215,7 @@ function splatPointer(pointer) {
   let dx = pointer.deltaX * config.SPLAT_FORCE;
   let dy = pointer.deltaY * config.SPLAT_FORCE;
   splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
+  splat( 1 - pointer.texcoordX, pointer.texcoordY, 1- dx, 1- dy, pointer.color);
 }
 
 function multipleSplats(amount) {
@@ -4340,7 +4339,7 @@ function updatePointerMoveData(pointer, posX, posY) {
   pointer.prevTexcoordY = pointer.texcoordY;
   pointer.texcoordX = posX / canvas.width;
   pointer.texcoordY = 1.0 - posY / canvas.height;
-  console.log("Hi Sanjay", pointer.texcoordX, pointer.prevTexcoordX)
+  console.log("Hi Sanjay", pointer.texcoordX, pointer.prevTexcoordX);
   pointer.deltaX = correctDeltaX(pointer.texcoordX - pointer.prevTexcoordX);
   pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
   pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
@@ -4453,25 +4452,22 @@ function hashCode(s) {
     hash |= 0; // Convert to 32bit integer
   }
   return hash;
-
 }
 
 // ... (rest of the code remains the same)
 
 // Instead of mouse event listeners, we'll use a function to draw the path
 function drawPath() {
-
   let index = 0;
   let intervalId = setInterval(() => {
-
       if (index >= path.length) {
           clearInterval(intervalId); 
           return; 
       }
 
       let point = path[index];
-      let posX = point.x; 
-      let posY = point.y; 
+      let posX = point.x
+      let posY = point.y
 
       // Simulate mouse down at the start
       if (index === 0) {
@@ -4487,8 +4483,9 @@ function drawPath() {
       }
 
       index++;
-  }, 35); // Adjust the interval time for desired drawing speed
+  }, 11); // Adjust the interval time for desired drawing speed
 }
 
 // Call the function to start drawing the path
 drawPath(); 
+
