@@ -2554,7 +2554,7 @@ resizeCanvas();
 
 let config = {
   SIM_RESOLUTION: 128,
-  DYE_RESOLUTION: 512,
+  DYE_RESOLUTION: 1024,
   CAPTURE_RESOLUTION: 512,
   DENSITY_DISSIPATION: 1,
   VELOCITY_DISSIPATION: 0.2,
@@ -2609,7 +2609,7 @@ if (!ext.supportLinearFiltering) {
   config.SUNRAYS = false;
 }
 
-startGUI();
+// startGUI();
 
 function getWebGLContext(canvas) {
   const params = {
@@ -2837,6 +2837,8 @@ function startGUI() {
   app.domElement.parentElement.appendChild(appIcon);
   appIcon.className = "icon app";
 
+  
+  // gui.close()
   if (isMobile()) gui.close();
 }
 
@@ -4215,7 +4217,7 @@ function splatPointer(pointer) {
   let dx = pointer.deltaX * config.SPLAT_FORCE;
   let dy = pointer.deltaY * config.SPLAT_FORCE;
   splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
-  splat( 1 - pointer.texcoordX, pointer.texcoordY, 1- dx, 1- dy, pointer.color);
+  splat( 0.97 - pointer.texcoordX, 1 - pointer.texcoordY, 1 - dx, 1 - dy, pointer.color);
 }
 
 function multipleSplats(amount) {
@@ -4257,27 +4259,27 @@ function correctRadius(radius) {
   return radius;
 }
 
-canvas.addEventListener("mousedown", (e) => {
-  let posX = scaleByPixelRatio(e.offsetX);
-  let posY = scaleByPixelRatio(e.offsetY);
-  let pointer = pointers.find((p) => p.id == -1);
-  if (pointer == null) pointer = new pointerPrototype();
-  updatePointerDownData(pointer, -1, posX, posY);
-});
+// canvas.addEventListener("mousedown", (e) => {
+//   let posX = scaleByPixelRatio(e.offsetX);
+//   let posY = scaleByPixelRatio(e.offsetY);
+//   let pointer = pointers.find((p) => p.id == -1);
+//   if (pointer == null) pointer = new pointerPrototype();
+//   updatePointerDownData(pointer, -1, posX, posY);
+// });
 
-let cursorArray = [];
-canvas.addEventListener("mousemove", (e) => {
-  let pointer = pointers[0];
-  if (!pointer.down) return;
-  let posX = scaleByPixelRatio(e.offsetX);
-  let posY = scaleByPixelRatio(e.offsetY);
-  cursorArray.push({ x: posX, y: posY });
-  updatePointerMoveData(pointer, posX, posY);
-});
+// let cursorArray = [];
+// canvas.addEventListener("mousemove", (e) => {
+//   let pointer = pointers[0];
+//   if (!pointer.down) return;
+//   let posX = scaleByPixelRatio(e.offsetX);
+//   let posY = scaleByPixelRatio(e.offsetY);
+//   cursorArray.push({ x: posX, y: posY });
+//   updatePointerMoveData(pointer, posX, posY);
+// });
 
-window.addEventListener("mouseup", () => {
-  updatePointerUpData(pointers[0]);
-});
+// window.addEventListener("mouseup", () => {
+//   updatePointerUpData(pointers[0]);
+// });
 
 canvas.addEventListener("touchstart", (e) => {
   e.preventDefault();
@@ -4339,7 +4341,6 @@ function updatePointerMoveData(pointer, posX, posY) {
   pointer.prevTexcoordY = pointer.texcoordY;
   pointer.texcoordX = posX / canvas.width;
   pointer.texcoordY = 1.0 - posY / canvas.height;
-  console.log("Hi Sanjay", pointer.texcoordX, pointer.prevTexcoordX);
   pointer.deltaX = correctDeltaX(pointer.texcoordX - pointer.prevTexcoordX);
   pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
   pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
@@ -4454,15 +4455,21 @@ function hashCode(s) {
   return hash;
 }
 
-// ... (rest of the code remains the same)
 
 // Instead of mouse event listeners, we'll use a function to draw the path
 function drawPath() {
   let index = 0;
+  let runIndex = 1
   let intervalId = setInterval(() => {
       if (index >= path.length) {
+        
+        if (runIndex == 2) {
+
           clearInterval(intervalId); 
           return; 
+        }
+          runIndex = 2;
+          index = 0;
       }
 
       let point = path[index];
@@ -4488,4 +4495,3 @@ function drawPath() {
 
 // Call the function to start drawing the path
 drawPath(); 
-
