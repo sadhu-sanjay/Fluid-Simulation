@@ -132,6 +132,7 @@
       }
 
       .promo-content {
+        min-width: 300px;
         width: 30dvw;
         aspect-ratio: 16/9;
         max-width: 80vh;
@@ -189,10 +190,10 @@
       .promo-body p {
         margin-top: 0;
         margin-bottom: 3rem;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         color: white;
-        font-weight: 700;
-        mix-blend-mode: color-dodge;
+        font-weight: 800;
+       /* mix-blend-mode: color-dodge; */
       }
 
       .link {
@@ -217,12 +218,19 @@
         color: #023c40;
       }
 
+
       .links-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
         /* gap: 1rem; */
       }
+
+        @media (max-width: 768px) {
+          .links-container {
+            flex-direction: column;
+          }
+        }
 
       .alternative-button {
         width: 70%;
@@ -325,6 +333,8 @@
       </div>
     </div>
 
-    <script src="./script.min.js"></script>
+
+    <script src="./script.js"></script>
+    <!-- <script src="./script.min.js"></script> -->
   </body>
 </html>

@@ -3126,7 +3126,7 @@ const promoPopupClose = document.getElementsByClassName("promo-close")[0];
 
 // if (isMobile()) {
 //   setTimeout(() => {
-    promoPopup.style.display = "table";
+//     promoPopup.style.display = "table";
 //   }, 1000);
 // }
 
@@ -4986,7 +4986,7 @@ function drawPath() {
         promoPopup.style.display = "table";
       }
 
-      if (runIndex == 8) {
+      if (runIndex == 2) {
         clearInterval(intervalId);
         return;
       }
