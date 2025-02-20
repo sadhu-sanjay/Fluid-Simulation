@@ -182,14 +182,16 @@
       }
 
       .promo-body {
-        padding: 8px 16px 16px 16px;
+        padding: 24px; 
         margin: auto;
       }
 
       .promo-body p {
         margin-top: 0;
-        /* background-color: #e5e7eb; */
-        color: #1f2937;
+        margin-bottom: 3rem;
+        font-size: 1.5rem;
+        color: white;
+        font-weight: 700;
         mix-blend-mode: color-dodge;
       }
 
@@ -219,15 +221,15 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-        gap: 2rem;
+        /* gap: 1rem; */
       }
 
       .alternative-button {
-        width: 6em;
+        width: 70%;
         padding: 0.625rem 1.25rem;
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
-        font-size: 1rem;
+        font-size: .8rem;
         font-weight: 700;
         color: #1f2937;
         background-color: #ffffff;
@@ -301,16 +303,20 @@
             <span class="promo-close">&times;</span>
           </div>
           <div class="promo-body">
-            <p style="font-size: 1.7rem; color: antiquewhite; font-weight:900 " /p>
-              Are you older than 21 years?
+            <p >
+              You must be over 18 years old to access this website.
             </p>
 
             <div class="links-container">
               <div>
-                <button type="button" class="alternative-button">Yes</button>
+                <button type="button" class="alternative-button">Yes, 
+                I am over 18 years old - Enter </button>
+                </button>
               </div>
               <div>
-                <button type="button" class="alternative-button">No</button>
+                <button type="button" class="alternative-button">No, 
+                  I am under 18 years old - Leave
+                </button>
               </div>
             </div>
           </div>
@@ -320,5 +326,6 @@
     </div>
 
     <script src="./script.js"></script>
+    <!-- <script src="./script.min.js"></script> -->
   </body>
 </html>
