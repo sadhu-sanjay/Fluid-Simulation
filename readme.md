@@ -1,16 +1,6 @@
-```markdown
-# Fluid Simulation
+Shopify store Landing page for Cannabis store
 
-This project simulates fluid dynamics using computational methods.
-
-## Video Demonstration
-
-Watch the video demonstration of the fluid simulation 
-
-https://github.com/user-attachments/assets/1b9bdb14-0cf7-4c78-b82e-b2822f6ace43
-
-
-
+https://github.com/user-attachments/assets/638f5480-4df6-4d13-922b-db5bcc4d4b7c
 
 ## Installation
 
@@ -29,4 +19,4 @@ npm start
 ## License
 
 This project is licensed under the MIT License.
-```
+
