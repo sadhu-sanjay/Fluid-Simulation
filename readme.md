@@ -5,7 +5,8 @@ This project simulates fluid dynamics using computational methods.
 
 ## Video Demonstration
 
-Watch the video demonstration of the fluid simulation [here](https://sanjaygoswami.web.app/_astro/fluid.ChuRzD83.mp4).
+Watch the video demonstration of the fluid simulation [![HERE](https://sanjaygoswami.web.app/_astro/fluid.ChuRzD83.mp4)]
+
 
 ## Installation
 
