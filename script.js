@@ -2524,15 +2524,14 @@ const promoPopup = document.getElementsByClassName("promo")[0];
 const promoPopupClose = document.getElementsByClassName("promo-close")[0];
 
 // if (isMobile()) {
-  setTimeout(() => {
-    promoPopup.style.display = "table";
-  }, 1000);
+//   setTimeout(() => {
+//     promoPopup.style.display = "table";
+//   }, 1000);
 // }
 
 promoPopupClose.addEventListener("click", (e) => {
   promoPopup.style.display = "none";
 });
-
 
 // Simulation section
 
@@ -2640,7 +2639,6 @@ function getWebGLContext(canvas) {
     formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
     formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
   }
-
 
   return {
     gl,
@@ -2750,7 +2748,6 @@ function startGUI() {
   captureFolder.add(config, "TRANSPARENT").name("transparent");
   captureFolder.add({ fun: captureScreenshot }, "fun").name("take screenshot");
 
-  
   // gui.close()
   if (isMobile()) gui.close();
 }
@@ -4130,7 +4127,13 @@ function splatPointer(pointer) {
   let dx = pointer.deltaX * config.SPLAT_FORCE;
   let dy = pointer.deltaY * config.SPLAT_FORCE;
   splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
-  splat( 0.97 - pointer.texcoordX, 1 - pointer.texcoordY, 1 - dx, 1 - dy, pointer.color);
+  splat(
+    0.97 - pointer.texcoordX,
+    1 - pointer.texcoordY,
+    1 - dx,
+    1 - dy,
+    pointer.color
+  );
 }
 
 function multipleSplats(amount) {
@@ -4368,44 +4371,47 @@ function hashCode(s) {
   return hash;
 }
 
-
-
 // Instead of mouse event listeners, we'll use a function to draw the path
 function drawPath() {
   let index = 0;
-  let runIndex = 1
+  let runIndex = 1;
   let intervalId = setInterval(() => {
-      if (index >= path.length) {
-        
-        if (runIndex == 2) {
 
-          clearInterval(intervalId); 
-          return; 
-        }
-          runIndex = 2;
-          index = 0;
+    if (index >= path.length) {
+
+      if (runIndex == 1) {
+        promoPopup.style.display = "table";
       }
 
-      let point = path[index];
-      let posX = point.x
-      let posY = point.y
-
-      // Simulate mouse down at the start
-      if (index === 0) {
-          updatePointerDownData(pointers[0], -1, posX, posY); 
+      if (runIndex == 8) {
+        clearInterval(intervalId);
+        return;
       }
 
-      // Simulate mouse move 
-      updatePointerMoveData(pointers[0], posX, posY); 
+      runIndex = 2;
+      index = 0;
+    }
 
-      // Simulate mouse up at the end
-      if (index === path.length - 1) {
-          updatePointerUpData(pointers[0]); 
-      }
+    let point = path[index];
+    let posX = point.x;
+    let posY = point.y;
 
-      index++;
+    // Simulate mouse down at the start
+    if (index === 0) {
+      updatePointerDownData(pointers[0], -1, posX, posY);
+    }
+
+    // Simulate mouse move
+    updatePointerMoveData(pointers[0], posX, posY);
+
+    // Simulate mouse up at the end
+    if (index === path.length - 1) {
+      updatePointerUpData(pointers[0]);
+    }
+
+    index++;
   }, 11); // Adjust the interval time for desired drawing speed
 }
 
 // Call the function to start drawing the path
-drawPath(); 
+drawPath();

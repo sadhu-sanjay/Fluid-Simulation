@@ -140,7 +140,7 @@
 
       .promo-content {
         width: 30dvw;
-        height: 30vh;
+        aspect-ratio: 16/9;
         max-width: 80vh;
         max-height: 80vw;
         margin: auto;
@@ -149,28 +149,37 @@
         font-family: Futura, "Trebuchet MS", Arial, sans-serif;
         text-align: center;
         /* background-image: url("promo_back.png"); */
+        background-image: url("Weed_Orange_1296x728.webp");
+        opacity: 0.7;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: 15px;
-        background-color: rgba(255, 255, 255, 0.15);
+        background-color: rgba(2, 37, 3, 0.15);
         backdrop-filter: blur(10px);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        animation: promo-appear-animation 1s ease-in-out;
+        animation: promo-appear-animation 1s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
       }
 
       .promo-header {
-        height: 10%;
-        padding: 2px 16px;
+        /* height: 5%;
+        padding: 2px 16px; */
       }
 
       .promo-close {
-        width: 10%;
-        height: 100%;
-        text-align: left;
-        float: left;
-        font-size: 1.3em;
+        position: absolute;
+        right: 25px;
+        top: 5px;
+        aspect-ratio: 1/1;
+        text-align: center;
+        font-size: 1em;
+        color: #1f2937;
+        mix-blend-mode: color-dodge;
         /* transition: 0.2s; */
       }
 
@@ -186,6 +195,8 @@
 
       .promo-body p {
         margin-top: 0;
+        /* background-color: #e5e7eb; */
+        color: #1f2937;
         mix-blend-mode: color-dodge;
       }
 
@@ -197,9 +208,8 @@
       }
 
       .link button {
-        width: 100px;
         padding: 10px;
-        font-size: 1.2em;
+        font-size: 2rem;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -215,8 +225,50 @@
       .links-container {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 2rem;
       }
+
+      .alternative-button {
+        width: 6em;
+        padding: 0.625rem 1.25rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1f2937;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 9999px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .alternative-button:hover {
+        background-color: #f3f4f6;
+        color: #1d4ed8;
+    }
+
+    .alternative-button:focus {
+        z-index: 10;
+        ring: 4px;
+        ring-color: #f3f4f6;
+    }
+
+    .alternative-button.dark {
+        background-color: #1f2937;
+        color: #9ca3af;
+        border-color: #4b5563;
+    }
+
+    .alternative-button.dark:hover {
+        background-color: #374151;
+        color: #ffffff;
+    }
+
+    .alternative-button.dark:focus {
+        ring-color: #374151;
+    }
 
       @keyframes promo-appear-animation {
         0% {
@@ -225,7 +277,7 @@
         }
         100% {
           transform: scale(1);
-          opacity: 1;
+          opacity: 0.7;
         }
       }
 
@@ -256,18 +308,20 @@
             <span class="promo-close">&times;</span>
           </div>
           <div class="promo-body">
-            <p style="font-size: 1.8rem; color: antiquewhite; font-weight: bold; " /p>
+            <p style="font-size: 1.7rem; color: antiquewhite; font-weight:900 " /p>
               Are you older than 21 years?
             </p>
+
             <div class="links-container">
-              <div class="link">
-                <button id="yes_button">Yes</button>
+              <div>
+                <button type="button" class="alternative-button">Yes</button>
               </div>
-              <div class="link">
-                <button id="no_button">No</button>
+              <div>
+                <button type="button" class="alternative-button">No</button>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
